@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: nacos-provider
+          uri: lb://nacos-provider
+          predicates:
+            - Path=/demo/**
+          filters:
+            - StripPrefix=1
