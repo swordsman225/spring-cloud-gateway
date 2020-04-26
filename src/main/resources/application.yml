@@ -1,3 +1,12 @@
+server:
+  port: 8060
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 spring:
   profiles:
     active: dev
@@ -6,11 +15,18 @@ spring:
       discovery:
         locator:
           enabled: true
-          lowerCaseServiceId: true
-      routes:
-        - id: nacos-provider
-          uri: lb://nacos-provider
-          predicates:
-            - Path=/demo/**
+          lower-case-service-id: true
           filters:
             - StripPrefix=1
+#      routes:
+#        - id: xmall-sso
+#          uri: lb://xmall-sso
+#          predicates:
+#            - Path=/xmall-sso/**
+#          filters:
+#            - StripPrefix=1
+logging:
+  level:
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    reactor.ipc.netty: debug
